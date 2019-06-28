@@ -1,37 +1,29 @@
+import fs from 'fs';
 import express from 'express';
+import mysql from 'mysql';
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const data = fs.readFileSync('./database.json');
+const conf = JSON.parse(data);
+
+const connection = mysql.createConnection({
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database
+});
+
+connection.connect();
+
 app.get('/api/customers', (req, res) => {
-  res.send([
-    {
-      id: 1,
-      image: 'https://placeimg.com/64/64/1',
-      name: 'Betty',
-      birthday: 900310,
-      gender: 'Female',
-      job: 'not working'
-    },
-    {
-      id: 2,
-      image: 'https://placeimg.com/64/64/2',
-      name: 'Helen',
-      birthday: 900310,
-      gender: 'Female',
-      job: 'programmer'
-    },
-    {
-      id: 3,
-      image: 'https://placeimg.com/64/64/3',
-      name: 'John',
-      birthday: 900310,
-      gender: 'Male',
-      job: 'backend'
-    }
-  ]);
+  connection.query('SELECT * FROM CUSTOMER', (err, rows, fields) => {
+    res.send(rows);
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
