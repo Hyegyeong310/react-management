@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "nodemon --exec babel-node server.js --delay 2",
     "dev": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   },
   "dependencies": {
