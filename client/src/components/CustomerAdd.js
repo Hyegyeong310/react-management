@@ -18,6 +18,7 @@ class CustomerAdd extends Component {
     e.preventDefault();
     this.addCustomer().then(response => {
       console.log(response.data);
+      this.props.stateRefresh();
     });
     this.setState({
       file: null,
@@ -27,7 +28,6 @@ class CustomerAdd extends Component {
       job: '',
       fileName: ''
     });
-    window.location.reload();
   };
 
   handleFileChange = e => {
@@ -70,6 +70,7 @@ class CustomerAdd extends Component {
           file={this.state.file}
           value={this.state.fileName}
           onChange={this.handleFileChange}
+          accept="image/*"
         />
         <br />
         이름:{' '}
