@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && yarn start",
+    "client": "cd client && yarn start --delay 2",
     "server": "nodemon --exec babel-node server.js --delay 2",
     "dev": "concurrently --kill-others-on-fail \"yarn server\"  \"yarn client\""
   },
@@ -12,10 +12,15 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "aws-sdk": "^2.484.0",
     "body-parser": "^1.18.3",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
+    "helmet": "^3.18.0",
     "http-proxy-middleware": "^0.19.1",
-    "multer": "^1.4.1"
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "multer-s3": "^2.9.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

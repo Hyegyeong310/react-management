@@ -29,10 +29,12 @@ class CustomerAdd extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.addCustomer().then(response => {
-      console.log(response.data);
-      this.props.stateRefresh();
-    });
+    this.addCustomer()
+      .then(response => {
+        console.log(response.data);
+        this.props.stateRefresh();
+      })
+      .catch(err => console.log(err));
     this.setState({
       file: null,
       userName: '',
@@ -119,7 +121,7 @@ class CustomerAdd extends Component {
                 variant="contained"
                 color="primary"
                 component="span"
-                name="file"
+                name="image"
               >
                 {this.state.fileName === ''
                   ? '프로필 이미지 선택'

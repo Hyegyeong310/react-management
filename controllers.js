@@ -11,9 +11,10 @@ export const getCustomers = (req, res) => {
 
 export const postCustomers = (req, res) => {
   let sql = 'INSERT INTO CUSTOMER VALUES (null, ?, ?, ?, ?, ?, now(), 0)';
-  let image = `/image/${req.file.filename}`;
+  // let image = `/image/${req.file.filename}`;
   const {
-    body: { name, birthday, gender, job }
+    body: { name, birthday, gender, job },
+    file: { location: image }
   } = req;
   let params = [image, name, birthday, gender, job];
   connection.query(sql, params, (err, rows, fields) => {
